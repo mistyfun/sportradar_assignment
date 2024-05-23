@@ -3,6 +3,8 @@ package org.example;
 import org.example.scoreboard.ScoreBoard;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 
@@ -20,7 +22,17 @@ public class ScoreBoardTest {
         String awayTeam = "Taiwan";
         ScoreBoard scoreBoard = new ScoreBoard();
         scoreBoard.startMatch(homeTeam, awayTeam);
-        assertThat(scoreBoard.getSummary()).isEqualTo("Japan 0 - Taiwan 0");
+        assertThat(scoreBoard.getSummary()).isEqualTo(List.of("Japan 0 - Taiwan 0"));
+    }
+
+    @Test
+    public void summary_returns_correct_countries_for_a_started_match(){
+        String homeTeam = "Korea";
+        String awayTeam = "China";
+        ScoreBoard scoreBoard = new ScoreBoard();
+        scoreBoard.getSummary();
+        scoreBoard.startMatch(homeTeam, awayTeam);
+        assertThat(scoreBoard.getSummary()).isEqualTo(List.of("Korea 0 - China 0"));
     }
 
 }
