@@ -32,24 +32,24 @@ import java.util.Map;
  * scoreboard.
  */
 public class ScoreBoard {
-    private int homeScore;
-    private int awayScore;
-    private String homeTeam;
-    private String awayTeam;
+    Match match;
 
     public void startMatch(String homeTeam, String awayTeam) {
-        this.homeTeam = homeTeam;
-        this.awayTeam = awayTeam;
-        this.homeScore = 0;
-        this.awayScore = 0;
+        this.match = new Match(homeTeam, awayTeam, 0, 0);
     }
 
     public List<String> getSummary() {
-        if(homeTeam == null || awayTeam == null){
+        if(this.match == null){
             return null;
         }
         StringBuilder str = new StringBuilder();
-        str.append(homeTeam).append(" ").append(homeScore).append(" - ").append(awayTeam).append(" ").append(awayScore);
+        str.append(this.match.homeTeam())
+                .append(" ")
+                .append(this.match.homeScore())
+                .append(" - ")
+                .append(this.match.awayTeam())
+                .append(" ")
+                .append(this.match.awayScore());
         return List.of(str.toString());
     }
 
