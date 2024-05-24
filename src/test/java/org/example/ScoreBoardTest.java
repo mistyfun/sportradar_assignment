@@ -40,16 +40,25 @@ public class ScoreBoardTest {
         ScoreBoard scoreBoard = new ScoreBoard();
         String homeTeam1 = "Korea";
         String awayTeam1 = "China";
-        scoreBoard.startMatch(homeTeam1,awayTeam1);
+        scoreBoard.startMatch(homeTeam1, awayTeam1);
         assertThat(scoreBoard.getSummary().size()).isEqualTo(1);
         String homeTeam2 = "Japan";
         String awayTeam2 = "Taiwan";
-        scoreBoard.startMatch(homeTeam2,awayTeam2);
+        scoreBoard.startMatch(homeTeam2, awayTeam2);
         assertThat(scoreBoard.getSummary().size()).isEqualTo(2);
     }
 
     @Test
     public void updateScore_updates_the_score() {
+        ScoreBoard scoreBoard = new ScoreBoard();
+        String homeTeam = "Japan";
+        String awayTeam = "Taiwan";
+        int homeScore = 0;
+        int awayScore = 0;
+        scoreBoard.startMatch(homeTeam, awayTeam);
+        scoreBoard.updateScore(homeTeam, awayTeam, homeScore, awayScore + 1);
+        assertThat(scoreBoard.getSummary()).isEqualTo(List.of("Japan 0 - Taiwan 1"));
+
     }
 
 }

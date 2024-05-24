@@ -40,6 +40,17 @@ public class ScoreBoard {
         //I removed the this.match because I need a list of matches and not a single match
     }
 
+    public void updateScore(String homeTeam, String awayTeam, int homeScore, int awayScore) {
+        for (Match match : matches) {
+            if (homeTeam.equals(match.homeTeam)) {
+                match.homeScore += homeScore;
+            }
+            if (awayTeam.equals(match.awayTeam)) {
+                match.awayScore += awayScore;
+            }
+        }
+    }
+
     public List<String> getSummary() {
         if (this.matches.isEmpty()) {
             return null;
