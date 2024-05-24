@@ -26,13 +26,29 @@ public class ScoreBoardTest {
     }
 
     @Test
-    public void summary_returns_correct_countries_for_a_started_match(){
+    public void summary_returns_correct_countries_for_a_started_match() {
         String homeTeam = "Korea";
         String awayTeam = "China";
         ScoreBoard scoreBoard = new ScoreBoard();
         scoreBoard.getSummary();
         scoreBoard.startMatch(homeTeam, awayTeam);
         assertThat(scoreBoard.getSummary()).isEqualTo(List.of("Korea 0 - China 0"));
+    }
+
+    @Test
+    public void summary_returns_the_correct_number_of_newly_started_matches() {
+        ScoreBoard scoreBoard = new ScoreBoard();
+        String homeTeam1 = "Korea";
+        String awayTeam1 = "China";
+        String homeTeam2 = "Japan";
+        String awayTeam2 = "Taiwan";
+        scoreBoard.startMatch(homeTeam1,awayTeam1);
+        scoreBoard.startMatch(homeTeam2,awayTeam2);
+        assertThat(scoreBoard.getSummary().size()).isEqualTo(2);
+    }
+
+    @Test
+    public void updateScore_updates_the_score() {
     }
 
 }
