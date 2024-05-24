@@ -1,5 +1,6 @@
 package org.example.scoreboard;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -32,25 +33,22 @@ import java.util.Map;
  * scoreboard.
  */
 public class ScoreBoard {
-    Match match;
+    List<Match> matches = new ArrayList<>();
 
     public void startMatch(String homeTeam, String awayTeam) {
-        this.match = new Match(homeTeam, awayTeam, 0, 0);
+        matches.add(new Match(homeTeam, awayTeam, 0, 0));
+        //I removed the this.match because I need a list of matches and not a single match
     }
 
     public List<String> getSummary() {
-        if(this.match == null){
+        if (this.matches.isEmpty()) {
             return null;
         }
-        StringBuilder str = new StringBuilder();
-        str.append(this.match.homeTeam())
-                .append(" ")
-                .append(this.match.homeScore())
-                .append(" - ")
-                .append(this.match.awayTeam())
-                .append(" ")
-                .append(this.match.awayScore());
-        return List.of(str.toString());
+        List<String> stringMatches = new ArrayList<>();
+        for (Match match : matches) {
+            stringMatches.add(match.toString());
+        }
+        return stringMatches;
     }
 
 
