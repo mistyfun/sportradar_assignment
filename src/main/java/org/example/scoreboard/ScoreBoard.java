@@ -59,6 +59,7 @@ public class ScoreBoard {
         for (Match match : matches) {
             stringMatches.add(match.toString());
         }
+
         return stringMatches;
     }
 

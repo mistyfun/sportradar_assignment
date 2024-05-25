@@ -2,19 +2,23 @@ package org.example.scoreboard;
 
 import java.util.Comparator;
 
-class Match implements Comparable {
+class Match implements Comparable<Match> {
 
+    static int matchesStarted = 0;
     String homeTeam;
     String awayTeam;
     int homeScore;
     int awayScore;
+    int matchNumber;
 
     public Match(String homeTeam, String awayTeam, int homeScore, int awayScore) {
         this.homeTeam = homeTeam;
         this.awayTeam = awayTeam;
         this.homeScore = homeScore;
         this.awayScore = awayScore;
+        this.matchNumber = matchesStarted++;
     }
+
 
     @Override
     public String toString() {
@@ -30,14 +34,10 @@ class Match implements Comparable {
     }
 
     @Override
-    public int compareTo(Object obj) {
+    public int compareTo(Match other) {
         // https://stackoverflow.com/a/25501226
-        if (obj == null || this.getClass() != obj.getClass()) {
-            throw new IllegalArgumentException("Object must be a non-null Match");
-        }
-        Match other = (Match) obj;
         return Comparator.comparingInt((Match match) -> match.homeScore + match.awayScore)
+                .thenComparingInt((Match match) -> match.matchNumber)
                 .compare(other, this);
     }
-
 }
