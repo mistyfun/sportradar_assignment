@@ -80,6 +80,15 @@ public class ScoreBoardTest {
     @Test
     public void matches_in_summary_are_sorted_by_started_time_if_total_goals_are_the_same() {
         ScoreBoard scoreBoard = new ScoreBoard();
+        startMatchAndSetScore(scoreBoard, "Norway", "Sweden", 1, 1);
+        startMatchAndSetScore(scoreBoard, "China", "Korea", 0, 1);
+        startMatchAndSetScore(scoreBoard, "Spain", "Italy", 3, 0);
+        startMatchAndSetScore(scoreBoard, "Japan", "Taiwan", 0, 3);
+
+        assertThat(scoreBoard.getSummary().get(0)).isEqualTo("Japan 0 - Taiwan 3");
+        assertThat(scoreBoard.getSummary().get(1)).isEqualTo("Spain 3 - Italy 0");
+        assertThat(scoreBoard.getSummary().get(2)).isEqualTo("Norway 1 - Sweden 1");
+        assertThat(scoreBoard.getSummary().get(3)).isEqualTo("China 0 - Korea 1");
     }
 
 }
