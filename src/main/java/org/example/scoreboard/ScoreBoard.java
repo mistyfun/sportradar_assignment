@@ -55,11 +55,11 @@ public class ScoreBoard {
             return null;
         }
         List<String> stringMatches = new ArrayList<>();
+        matches.sort(Match::compareTo);
         for (Match match : matches) {
             stringMatches.add(match.toString());
         }
         return stringMatches;
     }
-
 
 }

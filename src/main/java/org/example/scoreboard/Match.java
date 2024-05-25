@@ -1,6 +1,8 @@
 package org.example.scoreboard;
 
-class Match {
+import java.util.Comparator;
+
+class Match implements Comparable {
 
     String homeTeam;
     String awayTeam;
@@ -25,6 +27,17 @@ class Match {
                 .append(" ")
                 .append(this.awayScore);
         return str.toString();
+    }
+
+    @Override
+    public int compareTo(Object obj) {
+        // https://stackoverflow.com/a/25501226
+        if (obj == null || this.getClass() != obj.getClass()) {
+            throw new IllegalArgumentException("Object must be a non-null Match");
+        }
+        Match other = (Match) obj;
+        return Comparator.comparingInt((Match match) -> match.homeScore + match.awayScore)
+                .compare(other, this);
     }
 
 }

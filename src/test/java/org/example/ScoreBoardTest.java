@@ -68,8 +68,8 @@ public class ScoreBoardTest {
         startMatchAndSetScore(scoreBoard, "Japan", "Taiwan", 0, 3);
 
         assertThat(scoreBoard.getSummary().get(0)).isEqualTo("Japan 0 - Taiwan 3");
-        assertThat(scoreBoard.getSummary().get(1)).isEqualTo("China 0 - Korea 1");
-        assertThat(scoreBoard.getSummary().get(2)).isEqualTo("Norway 1 - Sweden 1");
+        assertThat(scoreBoard.getSummary().get(1)).isEqualTo("Norway 1 - Sweden 1");
+        assertThat(scoreBoard.getSummary().get(2)).isEqualTo("China 0 - Korea 1");
     }
 
     private void startMatchAndSetScore(ScoreBoard scoreBoard, String homeTeam, String awayTeam, int homeScore, int awayScore) {
