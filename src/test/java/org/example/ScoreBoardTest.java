@@ -58,7 +58,28 @@ public class ScoreBoardTest {
         scoreBoard.startMatch(homeTeam, awayTeam);
         scoreBoard.updateScore(homeTeam, awayTeam, homeScore, awayScore + 1);
         assertThat(scoreBoard.getSummary()).isEqualTo(List.of("Japan 0 - Taiwan 1"));
+    }
 
+    @Test
+    public void matches_in_summary_are_sorted_by_total_goals() {
+        ScoreBoard scoreBoard = new ScoreBoard();
+        startMatchAndSetScore(scoreBoard, "Norway", "Sweden", 1, 1);
+        startMatchAndSetScore(scoreBoard, "China", "Korea", 0, 1);
+        startMatchAndSetScore(scoreBoard, "Japan", "Taiwan", 0, 3);
+
+        assertThat(scoreBoard.getSummary().get(0)).isEqualTo("Japan 0 - Taiwan 3");
+        assertThat(scoreBoard.getSummary().get(1)).isEqualTo("China 0 - Korea 1");
+        assertThat(scoreBoard.getSummary().get(2)).isEqualTo("Norway 1 - Sweden 1");
+    }
+
+    private void startMatchAndSetScore(ScoreBoard scoreBoard, String homeTeam, String awayTeam, int homeScore, int awayScore) {
+        scoreBoard.startMatch(homeTeam, awayTeam);
+        scoreBoard.updateScore(homeTeam, awayTeam, homeScore, awayScore);
+    }
+
+    @Test
+    public void matches_in_summary_are_sorted_by_started_time_if_total_goals_are_the_same() {
+        ScoreBoard scoreBoard = new ScoreBoard();
     }
 
 }

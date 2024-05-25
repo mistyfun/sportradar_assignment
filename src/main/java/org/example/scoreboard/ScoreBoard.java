@@ -2,7 +2,6 @@ package org.example.scoreboard;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /*
  * Keep it simple. Follow the requirements and try to implement the simplest solution you can think of
