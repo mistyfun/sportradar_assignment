@@ -72,11 +72,6 @@ public class ScoreBoardTest {
         assertThat(scoreBoard.getSummary().get(2)).isEqualTo("China 0 - Korea 1");
     }
 
-    private void startMatchAndSetScore(ScoreBoard scoreBoard, String homeTeam, String awayTeam, int homeScore, int awayScore) {
-        scoreBoard.startMatch(homeTeam, awayTeam);
-        scoreBoard.updateScore(homeTeam, awayTeam, homeScore, awayScore);
-    }
-
     @Test
     public void matches_in_summary_are_sorted_by_started_time_if_total_goals_are_the_same() {
         ScoreBoard scoreBoard = new ScoreBoard();
@@ -89,6 +84,27 @@ public class ScoreBoardTest {
         assertThat(scoreBoard.getSummary().get(1)).isEqualTo("Spain 3 - Italy 0");
         assertThat(scoreBoard.getSummary().get(2)).isEqualTo("Norway 1 - Sweden 1");
         assertThat(scoreBoard.getSummary().get(3)).isEqualTo("China 0 - Korea 1");
+    }
+
+    @Test
+    public void finishing_a_match_removes_it_from_the_scoreboard() {
+        ScoreBoard scoreBoard = new ScoreBoard();
+        startMatchAndSetScore(scoreBoard, "Spain", "Italy", 2, 0);
+        startMatchAndSetScore(scoreBoard, "Japan", "Taiwan", 0, 1);
+        // first assert that there are 2, then remove 1,
+        assertThat(scoreBoard.getSummary().get(0)).isEqualTo("Spain 2 - Italy 0");
+        assertThat(scoreBoard.getSummary().get(1)).isEqualTo("Japan 0 - Taiwan 1");
+        scoreBoard.finishMatch("Spain");
+        // then assert that there is 1 (and that it`s the right one),
+        assertThat(scoreBoard.getSummary().get(0)).isEqualTo("Japan 0 - Taiwan 1");
+        // then remove 1 and assert that the summary is null
+        scoreBoard.finishMatch("Japan");
+        assertThat(scoreBoard.getSummary()).isEqualTo(null);
+    }
+
+    private void startMatchAndSetScore(ScoreBoard scoreBoard, String homeTeam, String awayTeam, int homeScore, int awayScore) {
+        scoreBoard.startMatch(homeTeam, awayTeam);
+        scoreBoard.updateScore(homeTeam, awayTeam, homeScore, awayScore);
     }
 
 }

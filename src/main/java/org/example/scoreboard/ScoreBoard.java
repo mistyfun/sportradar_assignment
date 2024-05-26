@@ -50,6 +50,10 @@ public class ScoreBoard {
         }
     }
 
+    public void finishMatch(String homeTeam){
+        matches.removeIf(match -> match.homeTeam.equals(homeTeam));
+    }
+
     public List<String> getSummary() {
         if (this.matches.isEmpty()) {
             return null;
