@@ -5,18 +5,19 @@ import java.util.Comparator;
 class Match implements Comparable<Match> {
 
     static int matchesStarted = 0;
+
     String homeTeam;
     String awayTeam;
     int homeScore;
     int awayScore;
     int matchNumber;
 
-    public Match(String homeTeam, String awayTeam, int homeScore, int awayScore) {
+    public Match(String homeTeam, String awayTeam) {
         this.homeTeam = homeTeam;
         this.awayTeam = awayTeam;
-        this.homeScore = homeScore;
-        this.awayScore = awayScore;
-        this.matchNumber = matchesStarted++;
+        this.homeScore = 0;
+        this.awayScore = 0;
+        this.matchNumber = Match.matchesStarted++;
     }
 
 

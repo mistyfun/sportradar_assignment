@@ -35,7 +35,7 @@ public class ScoreBoard {
     List<Match> matches = new ArrayList<>();
 
     public void startMatch(String homeTeam, String awayTeam) {
-        matches.add(new Match(homeTeam, awayTeam, 0, 0));
+        matches.add(new Match(homeTeam, awayTeam));
         //I removed the this.match because I need a list of matches and not a single match
     }
 
